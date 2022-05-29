@@ -7,15 +7,13 @@
 * It does without any additional installations. The only modules used so far are random and collections, which are standard libraries in python.
 * In the future, I want to include a more advanced GUI with tkinter or pygame, maybe also a multiplayer mode, where one can comfortably play with other players over the network.
 
-# how to use
+# How to use
 
 To play the game, you need to clone the repository and run the main.py file. Then follow the instructions in the console.
 
 
 
-# todos
+# TODOS
 
-* convert result to score, not just list
-* clean up the visual, maybe use tkinter or similar
 * create a gui to have a better game experience
 * add unit tests
