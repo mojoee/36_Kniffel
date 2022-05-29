@@ -15,6 +15,10 @@ class TestWuerfel(unittest.TestCase):
         test_wuerfel=Wuerfel(6,1,8)
         self.assertEqual(test_wuerfel.results, list(range(1,9)))
 
+    def test_bad_type(self):
+        
+        with self.assertRaises(TypeError):
+            test_wuerfel=Wuerfel(6,"1","8")
 
 
 if __name__=="__main__":
