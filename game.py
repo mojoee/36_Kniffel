@@ -12,7 +12,7 @@ class Spiel:
         
     def create_players(self):
         for i in range(self.players):
-            name=input(f"Please enter Player{i}'s name")
+            name=input(f"Please enter Player{i}'s name: ")
             self.player_list.append(Spieler(name, i))
 
     def create_wuerfel(self):
@@ -33,21 +33,33 @@ class Spiel:
 
     def player_turn(self, player: Spieler):
         turn_result=[]
-        #first throw
-        for j in range(3):
-            result=self.player_throw(player, 5-len(turn_result))
-            for i in result:
-                answer = input(f"Would you like to keep this dice: {i}? Y(es) or N(0)?")
-                if answer.lower()== "y":
-                    turn_result.append(i)
-            print(f"Your current dice result is {turn_result}")
+        #first and second throw
+        for j in range(2):
+            if len(turn_result)<5:
+                result=self.player_throw(player, 5-len(turn_result))
+                answer_choices= " ".join([str(x) for x in list(range(1,6-len(turn_result)))])
+                answer = input(f"Which dices would you like to keep? {answer_choices}: ")
+                answer = answer.split(' ')
+                if answer!=['']:
+                    for dice_to_keep in answer:
+                        turn_result.append(result[int(dice_to_keep)-1])
+                print(f"Your current dice result is {turn_result}")
+            else:
+                break
         
+        #third throw
+        if len(turn_result)<5:
+            result=self.player_throw(player, 5-len(turn_result))
+            turn_result.extend(result)
+            print(f"Your current dice result is {turn_result}")
+        input("Enter to proceed to score sheet")
+
         return turn_result
 
     def add_result_to_sheet(self, player: Spieler, turn_result):
         print(5*'*', "Your current score", 5*'*')
         player.print_score()
-        key = input("Where on the score sheet would you like to put your result?")
+        key = input("Where on the score sheet would you like to put your result? ")
         player.add_result_to_score(turn_result, key)
         print(5*'*', "Your updated score", 5*'*')
         player.print_score()
