@@ -1,4 +1,3 @@
-import random
 from re import L
 from dice import Wuerfel
 from spieler import Spieler
